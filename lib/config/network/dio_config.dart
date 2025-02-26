@@ -33,7 +33,17 @@ class DioProvider {
     try {
       return await mDio.get(url, queryParameters: queryParams);
     } on DioException catch (ex) {
-      if (ex.type == DioExceptionType.connectionTimeout) {
+      if (ex.type == DioExceptionType.unknown) {
+        // Parse the response data to get the message string
+        String message = 'No internet connection !';
+        // printf(" Message-----------${message}");
+
+        return Response(
+            data: message,
+            statusMessage: message,
+            statusCode: ex.response?.statusCode ?? 500,
+            requestOptions: RequestOptions());
+      } else if (ex.type == DioExceptionType.connectionTimeout) {
         return Response(
             data: AppStrings.connectionTimeoutMessage,
             statusMessage: AppStrings.connectionTimeoutMessage,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_project/config/resources/text_styles.dart';
 import 'package:flutter_base_project/utils/ui_components.dart';
 
+import '../../model/user_data_entity.dart';
 import '../../model/user_entity.dart';
 import '../custom_widget/image_widget.dart';
 

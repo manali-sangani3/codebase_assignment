@@ -2,6 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_base_project/app/model/user_entity.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../model/user_data_entity.dart';
+
 part 'user_detail_state.dart';
 
 class UserDetailCubit extends Cubit<UserDetailState> {

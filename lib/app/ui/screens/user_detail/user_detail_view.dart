@@ -7,6 +7,8 @@ import 'package:flutter_base_project/utils/extensions.dart';
 import 'package:flutter_base_project/utils/ui_components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../model/user_data_entity.dart';
+
 class UserDetailView extends StatefulWidget {
   final UserData details;
 

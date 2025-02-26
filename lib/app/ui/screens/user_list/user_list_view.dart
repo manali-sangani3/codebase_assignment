@@ -6,6 +6,7 @@ import 'package:flutter_base_project/app/ui/custom_widget/app_bar_mixin.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/cubit/user_list_cubit.dart';
 import 'package:flutter_base_project/config/utils.dart';
 import 'package:flutter_base_project/utils/extensions.dart';
+import 'package:flutter_base_project/utils/ui_components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -26,50 +27,27 @@ class UserListView extends StatefulWidget {
 
 class _UserListViewState extends State<UserListView> with AppBarMixin {
   @override
-  void initState() {
-    context
-        .read<UserListCubit>()
-        .pagingController
-        .addPageRequestListener((pageKey) {
-      context.read<UserListCubit>().getUsers(page: pageKey);
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     UserListCubit cubit = context.read<UserListCubit>();
     return BlocConsumer<UserListCubit, UserListState>(
-      listener: (context, state) {
-        if (state is FetchUsersLoading) {
-          // OverlayLoadingProgress.start(context);
-        }
-        if (state is UsersFound) {
-          if (state.isLastPage) {
-            context
-                .read<UserListCubit>()
-                .pagingController
-                .appendLastPage(state.usersData);
-          } else {
-            context.read<UserListCubit>().pagingController.appendPage(
-                state.usersData,
-                state.currentKey + 1 // Load next page correctly
-                );
-          }
-        } else if (state is UsersNotFound) {
-          context.read<UserListCubit>().pagingController.appendLastPage([]);
-          Utils.showErrorMessage(context: context, message: "Users not found");
-        } else if (state is UsersError) {
-          // OverlayLoadingProgress.stop;
-          context.read<UserListCubit>().pagingController.appendLastPage([]);
-          Utils.showErrorMessage(
-              context: context, message: "Something went wrong");
-        }
-      },
+      listener: buildBlocListener,
       builder: (context, state) {
         return Scaffold(
-            appBar: buildAppBar(title: "Users", context: context),
-            body: _buildUserBody(cubit));
+            appBar: buildAppBar(title: "Users", context: context, actions: [
+              UIComponent.customInkWellWidget(
+                  onTap: () {
+                    cubit.refreshUsers();
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Icon(Icons.refresh),
+                  ))
+            ]),
+            body: RefreshIndicator(
+                onRefresh: () {
+                  return cubit.refreshUsers();
+                },
+                child: _buildUserBody(cubit)));
       },
     );
   }
@@ -109,70 +87,71 @@ class _UserListViewState extends State<UserListView> with AppBarMixin {
 
           // User List
           Expanded(
-            child: PagedListView<int, UserData>.separated(
-              separatorBuilder: (context, index) {
-                return 16.verticalSpace;
-              },
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
-                  left: 16,
-                  right: 16),
-              pagingController: context.read<UserListCubit>().pagingController,
-              shrinkWrap: true,
-              builderDelegate: PagedChildBuilderDelegate<UserData>(
-                noItemsFoundIndicatorBuilder: (context) {
-                  return const NoDataWidget(
-                    title: "No data found",
-                  );
-                },
-                itemBuilder: (context, item, index) {
-                  return UserSingleTileWidget(
-                    user: item,
-                    onUserClick: (int id) {
-                      UserData data = item;
-                      String modelJson = jsonEncode(data.toJson());
-                      context
-                          .pushNamed(Routes.kUserDetailScreen, pathParameters: {
-                        RouteArguments.userData: modelJson,
-                      });
+            child: cubit.filteredUsers.isNotEmpty
+                ? ListView.separated(
+                    controller: cubit.scrollController,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount:
+                        cubit.filteredUsers.length + (cubit.isLastPage ? 0 : 1),
+                    itemBuilder: (context, index) {
+                      if (index == cubit.filteredUsers.length &&
+                          !cubit.isLastPage) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      final user = cubit.filteredUsers[index];
+                      return UserSingleTileWidget(
+                        user: user,
+                        onUserClick: (int id) {
+                          String modelJson = jsonEncode(user.toJson());
+                          context.pushNamed(Routes.kUserDetailScreen,
+                              pathParameters: {
+                                RouteArguments.userData: modelJson,
+                              });
+                        },
+                      );
                     },
-                  );
-                },
-              ),
-            ),
+                  )
+                : const Center(
+                    child: Text(
+                      "No data found",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
           ),
         ],
       );
 
-  /// Build bloc listener widget.
+  // Build bloc listener widget.
   void buildBlocListener(BuildContext context, UserListState state) {
+    final cubit = context.read<UserListCubit>();
+
+    // Show loading only for the first load
     if (state is FetchUsersLoading) {
-      // OverlayLoadingProgress.start(context);
+      const Center(child: CircularProgressIndicator());
     }
-    if (state is UsersFound) {
-      if (state.isLastPage) {
-        context
-            .read<UserListCubit>()
-            .pagingController
-            .appendLastPage(state.usersData);
-      } else {
-        context.read<UserListCubit>().pagingController.appendPage(
-            state.usersData, state.currentKey + 1 // Load next page correctly
-            );
-      }
-    } else if (state is UsersNotFound) {
-      context.read<UserListCubit>().pagingController.appendLastPage([]);
-      Utils.showErrorMessage(context: context, message: "Users not found");
-    } else if (state is UsersError) {
-      // OverlayLoadingProgress.stop;
-      context.read<UserListCubit>().pagingController.appendLastPage([]);
-      Utils.showErrorMessage(context: context, message: "Something went wrong");
+
+    // Show error message if API fails
+    if (state is UsersError) {
+      Center(child: Text(state.errorMessage));
+    }
+
+    // Show "No Data Found" when list is empty (FIXED!)
+    if (cubit.filteredUsers.isEmpty) {
+      const Center(
+        child: Text(
+          "No data found",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        ),
+      );
     }
   }
 
   @override
   void dispose() {
-    (context.read<UserListCubit>().pagingController.itemList ?? []).clear();
+    context.read<UserListCubit>().scrollController.dispose();
     super.dispose();
   }
 }

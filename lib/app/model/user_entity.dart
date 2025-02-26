@@ -1,21 +1,30 @@
+import 'package:flutter_base_project/app/model/user_data_entity.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-class UsersEntity {
+part 'user_entity.g.dart';
+
+@HiveType(typeId: 0)
+class UsersEntity extends HiveObject {
+  @HiveField(0)
   int? page;
+  @HiveField(1)
   int? perPage;
+  @HiveField(2)
   int? total;
+  @HiveField(3)
   int? totalPages;
+  @HiveField(4)
   List<UserData>? data;
-  Support? support;
 
-  UsersEntity(
-      {this.page,
-        this.perPage,
-        this.total,
-        this.totalPages,
-        this.data,
-        this.support});
+  UsersEntity({
+    this.page,
+    this.perPage,
+    this.total,
+    this.totalPages,
+    this.data,
+  });
 
   UsersEntity.fromJson(Map<String, dynamic> json) {
     page = json['page'];
@@ -28,8 +37,6 @@ class UsersEntity {
         data!.add(new UserData.fromJson(v));
       });
     }
-    support =
-    json['support'] != null ? new Support.fromJson(json['support']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -41,57 +48,6 @@ class UsersEntity {
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    if (this.support != null) {
-      data['support'] = this.support!.toJson();
-    }
     return data;
   }
 }
-
-class UserData {
-  int? id;
-  String? email;
-  String? firstName;
-  String? lastName;
-  String? avatar;
-
-  UserData({this.id, this.email, this.firstName, this.lastName, this.avatar});
-
-  UserData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    email = json['email'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    avatar = json['avatar'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['avatar'] = this.avatar;
-    return data;
-  }
-}
-
-class Support {
-  String? url;
-  String? text;
-
-  Support({this.url, this.text});
-
-  Support.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    text = json['text'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
-    data['text'] = this.text;
-    return data;
-  }
-}
-

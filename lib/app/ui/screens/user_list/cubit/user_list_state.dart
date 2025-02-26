@@ -15,13 +15,12 @@ class FetchUsersLoading extends UserListState {
 
 class UsersFound extends UserListState {
   final bool isLastPage;
-  final int currentKey;
   final List<UserData> usersData;
 
-  UsersFound(this.usersData, this.isLastPage, this.currentKey);
+  UsersFound(this.usersData, this.isLastPage);
 
   @override
-  List<Object> get props => [usersData, isLastPage, currentKey];
+  List<Object> get props => [usersData, isLastPage];
 }
 
 class UsersNotFound extends UserListState {
@@ -34,9 +33,9 @@ class UsersNotFound extends UserListState {
 }
 
 class UsersError extends UserListState {
-  final String errorMesssage;
+  final String errorMessage;
 
-  UsersError({required this.errorMesssage});
+  UsersError({required this.errorMessage});
 
   @override
   List<Object> get props => [];

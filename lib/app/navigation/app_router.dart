@@ -8,6 +8,7 @@ import 'package:flutter_base_project/app/ui/change_log.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/user_list_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../model/user_data_entity.dart';
 import '../ui/screens/product_detail/product_detail.screen.dart';
 import '../ui/screens/splash/splash_screen.dart';
 import '../ui/screens/unknown/invalid_screen.dart';
