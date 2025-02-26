@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/app/db/app_preferences.dart';
+import 'package:flutter_base_project/config/utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -36,7 +37,6 @@ class DioProvider {
       if (ex.type == DioExceptionType.unknown) {
         // Parse the response data to get the message string
         String message = 'No internet connection !';
-        // printf(" Message-----------${message}");
 
         return Response(
             data: message,

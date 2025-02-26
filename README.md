@@ -1,16 +1,38 @@
 # codebase_assignment
 
-A new Flutter project.
+## Following is the video of complete app functionality [https://drive.google.com/file/d/1dUY-_4N5-Ga4LuepPGm9Y3sq3CATVdGY/view?usp=sharing]
 
-## Getting Started
+## Flutter version
 
-This project is a starting point for a Flutter application.
+Flutter 3.27.0
+Tools • Dart 3.6.0
 
-A few resources to get you started if this is your first Flutter project:
+## Objective
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Develop a simple Flutter application that demonstrates state management, API integration, and UI development skills.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Project Overview
+
+The application will fetch and display a list of users from a public API with the following key features:
+
+-   **User List Screen:** Fetch and display users in a list, showing their name and profile picture.
+
+-   **User Detail Screen:** Display details of the selected user, including their profile picture, name and email.
+
+-   **Search Functionality:** Implement a search bar to filter users by name.
+
+-   **Pagination:** Load users in batches using API pagination and implement infinite scrolling to fetch more users when reaching the bottom of the list.
+
+## Technical Requirements
+
+-   **State Management:** BLoC Cubit.
+
+-   **Networking:** Dio
+
+## Bonus Points
+
+-   Implemented caching using **Hive**.
+
+-   Added a **Pull to Refresh** feature.
+
+-   Use Get_it DI for better code organization.

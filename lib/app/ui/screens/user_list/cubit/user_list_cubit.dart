@@ -82,7 +82,6 @@ class UserListCubit extends Cubit<UserListState> {
           emit(UsersFound(const [], isLastPage));
         }
       } else {
-
         emit(UsersError(errorMessage: "Failed to fetch users"));
       }
     } catch (e) {

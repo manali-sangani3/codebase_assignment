@@ -131,6 +131,8 @@ dev_dependencies:
 
   hive_generator: ^2.0.0
 
+  internet_connection_checker: ^3.0.1
+
 integration_test:
   sdk: flutter
 
