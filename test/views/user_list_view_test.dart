@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/app/data/repository/user_repository_impl.dart';
 import 'package:flutter_base_project/app/domain/repository/user_repository.dart';
+import 'package:flutter_base_project/app/model/user_data_entity.dart';
 import 'package:flutter_base_project/app/navigation/app_router.dart';
 import 'package:flutter_base_project/app/ui/screens/splash/cubit/splash_cubit.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/cubit/user_list_cubit.dart';
@@ -15,6 +16,23 @@ import 'package:mockito/mockito.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 class MockUserRepository extends Mock implements UserRepository {}
+
+class MockUserData {
+  static List<UserData> getUsers() {
+    return [
+      UserData(
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'john@example.com',
+          avatar: ''),
+      UserData(
+          firstName: 'Jane',
+          lastName: 'Smith',
+          email: 'jane@example.com',
+          avatar: ''),
+    ];
+  }
+}
 
 void main() {
   final getIt = GetIt.instance;
@@ -37,7 +55,7 @@ void main() {
         ],
         child: MaterialApp.router(
           builder: (context, widget) {
-            return widget!;
+            return Scaffold(body: widget!);
           },
           theme: buildTheme(Brightness.light),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -51,8 +69,24 @@ void main() {
     }
 
     testWidgets('UserListView UI test', (WidgetTester tester) async {
-      await tester.pumpWidget(testWrapper(child: const UserListView()));
+      await tester.pumpWidget(testWrapper(child: UserListView()));
       await tester.pumpAndSettle(const Duration(seconds: 2));
+      expect(find.text('Users'), findsOneWidget);
+      expect(find.byType(AppBar), findsOneWidget);
+    });
+    testWidgets('Displays search bar', (WidgetTester tester) async {
+      await tester.pumpWidget(testWrapper(child: UserListView()));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      expect(find.byType(TextField), findsOneWidget);
+      expect(find.byIcon(Icons.search), findsOneWidget);
+      expect(find.byIcon(Icons.clear), findsOneWidget);
+    });
+    testWidgets('Displays refresh button in app bar',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(testWrapper(child: UserListView()));
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+      expect(find.byIcon(Icons.refresh), findsOneWidget);
     });
   });
 }
