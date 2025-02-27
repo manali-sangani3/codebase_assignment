@@ -1,4 +1,3 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/app/navigation/routes.dart';
 import 'package:flutter_base_project/config/app_colors.dart';
@@ -39,24 +38,11 @@ class SplashScreen extends StatelessWidget {
 
   /// build app logo
   Widget _buildAvatar() {
-    return Hero(
-      tag: "app_logo",
-      child: AvatarGlow(
-        // glowBorderRadius: BorderRadius.circular(90),
-        duration: const Duration(seconds: 2),
-        glowColor: Colors.white24,
-        repeat: true,
-        startDelay: const Duration(seconds: 1),
-        child: Material(
-            elevation: 8.0,
-            shape: const CircleBorder(),
-            child: CircleAvatar(
-              backgroundColor: Colors.grey[100],
-              radius: 50.0,
-              child: const FlutterLogo(
-                size: 50.0,
-              ),
-            )),
+    return CircleAvatar(
+      backgroundColor: Colors.grey[100],
+      radius: 50.0,
+      child: const FlutterLogo(
+        size: 50.0,
       ),
     );
   }

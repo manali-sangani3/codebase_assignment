@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/app/db/app_preferences.dart';
 import 'package:flutter_base_project/app/ui/screens/user_detail/cubit/user_detail_cubit.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/cubit/user_list_cubit.dart';
 import 'package:flutter_base_project/config/network/app_connectivity.dart';
-import 'package:flutter_base_project/utils/loader/app_loader.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'app/bloc/application_cubit.dart';
-import 'app/db/database_helper.dart';
 import 'app/navigation/app_router.dart';
 import 'app/repository/user_repository.dart';
-import 'app/storage/app_storage.dart';
-import 'app/ui/screens/product_detail/cubit/product_detail_cubit.dart';
 import 'app/ui/screens/splash/cubit/splash_cubit.dart';
-import 'config/app_themes.dart';
 import 'config/flavor_config.dart';
 import 'config/network/dio_config.dart';
 
@@ -48,9 +42,7 @@ class _ApplicationState extends State<Application> {
               BlocProvider(
                   create: (BuildContext context) =>
                       UserListCubit(repository: GetIt.I<UserRepository>())),
-              BlocProvider(
-                  create: (BuildContext context) =>
-                      UserDetailCubit()),
+              BlocProvider(create: (BuildContext context) => UserDetailCubit()),
               // BlocProvider(
               //     create: (BuildContext context) => ProductDetailCubit(
               //         repository: GetIt.I<UserRepository>())),
@@ -65,8 +57,9 @@ class _ApplicationState extends State<Application> {
                   child: child!,
                 );
               },
-              theme: AppThemes.main(isDark: false),
-              darkTheme: AppThemes.main(isDark: true),
+              theme: ThemeData(
+                scaffoldBackgroundColor: Colors.white
+              ),
               routeInformationParser: AppRouter.router.routeInformationParser,
               routerDelegate: AppRouter.router.routerDelegate,
               routeInformationProvider:
@@ -83,14 +76,8 @@ class _ApplicationState extends State<Application> {
     GetIt getIt = GetIt.I;
 
     getIt.registerSingleton<UserRepository>(UserRepositoryImpl());
-    getIt.registerSingleton<DatabaseHelper>(DatabaseHelper());
-    getIt.registerSingleton<DioProvider>(DioProvider());
-    getIt.registerSingleton<AppStorage>(AppStorage());
-    getIt.registerSingleton<AppLoader>(AppLoader());
-    getIt.registerSingleton<AppPreferences>(AppPreferences());
 
-    // Initialise database
-    getIt<DatabaseHelper>().initialiseDb();
+    getIt.registerSingleton<DioProvider>(DioProvider());
 
     /// Initialise dio provider
     getIt<DioProvider>().initialise();

@@ -1,10 +1,8 @@
-abstract class AppAssets{
-  static const kCompanyVideo = 'assets/video/sample_video1.mp4';
-  static const kNoImage = 'assets/images/no_image.jpg';
+abstract class AppAssets {
   static const placeholder = 'assets/images/placeholder.jpg';
 }
 
-abstract class SVGAssets{
+abstract class SVGAssets {
   static const searchIcon = 'assets/svg/search_icon.svg';
   static const headerAppLogo = 'assets/svg/app_logo.svg';
   static const bluePlayIcon = 'assets/svg/blue_play_icon.svg';
@@ -23,14 +21,14 @@ abstract class SVGAssets{
   static const noData = 'assets/vectors/no_data.svg';
   static const placeholderProfile = 'assets/vectors/placeholder_profile.svg';
   static const noChatPlaceholder = 'assets/vectors/no_chat_placeholder.svg';
-
 }
-abstract class LottieAssets{
+
+abstract class LottieAssets {
   static const successAnimation = 'assets/lottie/success.json';
   static const syncAnimation = 'assets/lottie/synchronisation.json';
 }
 
-abstract class ClientAssets{
+abstract class ClientAssets {
   static const client1 = 'assets/clientlist/client1.png';
   static const client2 = 'assets/clientlist/client2.png';
   static const client3 = 'assets/clientlist/client3.png';

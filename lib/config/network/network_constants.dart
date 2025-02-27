@@ -11,6 +11,4 @@ abstract class NetworkConstants {
 abstract class NetworkAPIs {
   // User
   static const kGetUsers = "users";
-
 }
-

@@ -31,8 +31,6 @@ abstract class AppColors {
   static const Color documentBackground = Color(0xFFF9F9FB);
   static const Color yellow3F = Color(0xFFE1C03F);
 
-
-
   static const lightColorScheme = ColorScheme(
     brightness: Brightness.light,
     primary: pageBackground,

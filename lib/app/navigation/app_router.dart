@@ -1,15 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/app/model/user_entity.dart';
 import 'package:flutter_base_project/app/navigation/route_arguments.dart';
 import 'package:flutter_base_project/app/navigation/routes.dart';
-import 'package:flutter_base_project/app/ui/change_log.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/user_list_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../model/user_data_entity.dart';
-import '../ui/screens/product_detail/product_detail.screen.dart';
 import '../ui/screens/splash/splash_screen.dart';
 import '../ui/screens/unknown/invalid_screen.dart';
 import '../ui/screens/user_detail/user_detail_view.dart';
@@ -55,15 +52,6 @@ class AppRouter {
           );
         },
       ),
-
-      // // Screen : Product Details
-      // GoRoute(
-      //     name: Routes.kProductDetail,
-      //     path: RoutePaths.kProductDetailPath,
-      //     builder: (BuildContext context, GoRouterState state) =>
-      //         ProductDetailScreen(
-      //           productId: state.pathParameters[RouteArguments.productId] ?? "",
-      //         )),
     ],
     errorBuilder: (context, state) => const InvalidScreen(),
   );

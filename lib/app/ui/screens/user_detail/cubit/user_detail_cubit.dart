@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_base_project/app/model/user_entity.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../model/user_data_entity.dart';
@@ -13,8 +12,7 @@ class UserDetailCubit extends Cubit<UserDetailState> {
   String? avatar;
   String? email;
 
-
-  void getUserData(UserData data){
+  void getUserData(UserData data) {
     name = "${data.firstName} ${data.lastName}";
     avatar = data.avatar;
     email = data.email;

@@ -1,7 +1,5 @@
 import 'package:flutter_base_project/app/model/user_data_entity.dart';
 import 'package:hive/hive.dart';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 part 'user_entity.g.dart';
 

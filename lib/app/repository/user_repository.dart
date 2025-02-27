@@ -3,11 +3,7 @@ import 'package:hive/hive.dart';
 
 import '../../config/network/dio_config.dart';
 import '../../config/network/network_constants.dart';
-import '../db/database_helper.dart';
-import '../db/db_constants.dart';
-import '../db/schema/cart.dart';
 import '../model/base_model.dart';
-import '../model/product_detail_response.dart';
 import '../model/user_data_entity.dart';
 import '../model/user_entity.dart';
 
@@ -36,7 +32,7 @@ class UserRepositoryImpl extends UserRepository {
         } else {
           final Box hiveDetails = Hive.box<List>('usersBox');
           final data = hiveDetails.get('users');
-          box.put('users', data.cast<UserData>()+usersEntityResponse.data!);
+          box.put('users', data.cast<UserData>() + usersEntityResponse.data!);
         }
 
         return SuccessResponse(data: usersEntityResponse);

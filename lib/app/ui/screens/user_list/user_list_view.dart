@@ -1,24 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/app/model/user_entity.dart';
 import 'package:flutter_base_project/app/ui/custom_widget/app_bar_mixin.dart';
 import 'package:flutter_base_project/app/ui/custom_widget/app_button_mixin.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/cubit/user_list_cubit.dart';
-import 'package:flutter_base_project/config/app_colors.dart';
-import 'package:flutter_base_project/config/utils.dart';
-import 'package:flutter_base_project/utils/extensions.dart';
 import 'package:flutter_base_project/utils/ui_components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../config/resources/text_styles.dart';
-import '../../../../utils/custom_widgets/overlay_loading_progress.dart';
 import '../../../navigation/route_arguments.dart';
 import '../../../navigation/routes.dart';
-import '../../no_data_widget.dart';
-import '../../single_tile_widgets/product_single_tile_widget.dart';
+import '../../single_tile_widgets/user_single_tile_widget.dart';
 
 class UserListView extends StatefulWidget {
   const UserListView({super.key});
@@ -52,25 +45,23 @@ class _UserListViewState extends State<UserListView>
               controller: cubit.searchController,
               onChanged: (query) => cubit.searchUsers(query),
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search, color: Colors.grey),
-                hintText: "Search by first or last name...",
-                hintStyle: h16().copyWith(color: Colors.black.withAlpha(150)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.grey[100],
-                suffixIcon:  IconButton(
-                        icon: Icon(Icons.clear, color: Colors.grey),
-                        onPressed: () {
-                          cubit.searchController.clear();
-                          cubit.searchUsers(
-                              ""); // Reset to full list instead of refresh
-                        },
-                      )
-
-              ),
+                  prefixIcon: Icon(Icons.search, color: Colors.grey),
+                  hintText: "Search by first or last name...",
+                  hintStyle: h16().copyWith(color: Colors.black.withAlpha(150)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.clear, color: Colors.grey),
+                    onPressed: () {
+                      cubit.searchController.clear();
+                      cubit.searchUsers(
+                          ""); // Reset to full list instead of refresh
+                    },
+                  )),
             ),
           ),
           Expanded(

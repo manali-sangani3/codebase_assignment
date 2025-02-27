@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/app/model/user_entity.dart';
 import 'package:flutter_base_project/app/ui/custom_widget/app_bar_mixin.dart';
 import 'package:flutter_base_project/app/ui/screens/user_detail/cubit/user_detail_cubit.dart';
 import 'package:flutter_base_project/config/resources/text_styles.dart';
