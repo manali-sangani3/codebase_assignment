@@ -34,7 +34,6 @@ class UserRepositoryImpl extends UserRepository {
 
         return SuccessResponse(data: usersEntityResponse);
       } else {
-        print("response.statusCode:;;;;;;;${response.statusCode}");
         if (response.data != null) {
           final Box hiveDetails = Hive.box<List>('usersBox');
           final data = hiveDetails.get('users');
