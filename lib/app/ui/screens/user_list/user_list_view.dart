@@ -34,6 +34,7 @@ class _UserListViewState extends State<UserListView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key:  const ValueKey('user_list_page'),
       appBar: buildAppBar(
           title: appStrings(context).titleUsers,
           context: context,
@@ -153,7 +154,7 @@ class _UserListViewState extends State<UserListView>
 
   @override
   void dispose() {
-    context.read<UserListCubit>().scrollController.dispose();
+    cubit.scrollController.dispose();
     super.dispose();
   }
 }

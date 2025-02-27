@@ -10,6 +10,7 @@ mixin AppBarMixin {
       bool requireTransparent = false,
       List<Widget>? actions}) {
     return AppBar(
+      key: ValueKey('appbar'),
       leading: context.canPop()
           ? InkWell(
               onTap: () {

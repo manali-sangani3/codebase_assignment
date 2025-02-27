@@ -11,7 +11,8 @@ import '../../model/user_entity.dart';
 
 class UserRepositoryImpl extends UserRepository {
   @override
-  Future<ResponseBaseModel> getUsers({int page = 1, BuildContext? context}) async {
+  Future<ResponseBaseModel> getUsers(
+      {int page = 1, BuildContext? context}) async {
     final response = await GetIt.I<DioProvider>().getBaseAPI(
       url: NetworkAPIs.kGetUsers,
       queryParams: {

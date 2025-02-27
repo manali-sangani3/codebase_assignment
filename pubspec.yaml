@@ -73,6 +73,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  mockito:
+
+  network_image_mock: ^2.1.1
+
   flutter_flavorizr: ^2.2.1
 
   flutter_lints: ^4.0.0
