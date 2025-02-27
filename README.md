@@ -36,3 +36,5 @@ The application will fetch and display a list of users from a public API with th
 -   Added a **Pull to Refresh** feature.
 
 -   Use Get_it DI for better code organization.
+
+-   Implement test cases for widgets

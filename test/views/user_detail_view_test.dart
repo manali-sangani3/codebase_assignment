@@ -48,7 +48,6 @@ void main() {
           ),
           findsOneWidget,
         );
-// Avatar image
       });
     });
 
