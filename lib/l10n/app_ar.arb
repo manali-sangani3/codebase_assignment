@@ -1,0 +1,15 @@
+{
+   "changeLog" : "Change log",
+   "noInternetFoundTitle" : "No internet connection available.",
+   "connectionTimeoutMessage" : "Unable to reach server.",
+   "fetchFailed":"Failed to fetch users",
+   "commonError":"Something went wrong",
+   "btnRetry": "Retry",
+   "noData": "No data found",
+   "searchHint": "Search by first or last name...",
+   "lblContactInfo": "Contact Info",
+   "lblPersonal": "Personal",
+   "titleUsers": "Users",
+   "errorNoUsers": "No users found"
+
+}

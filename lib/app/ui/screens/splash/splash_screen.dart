@@ -12,18 +12,19 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.pageBackground,
-      body: _buildCenterLogo(),
-    );
-  }
-
-  /// Build center logo
-  Widget _buildCenterLogo() {
-    return BlocConsumer<SplashCubit, SplashState>(
-      listener: buildBlocListener,
-      builder: (_, __) {
-        return Center(child: _buildAvatar());
-      },
+      body: BlocConsumer<SplashCubit, SplashState>(
+        listener: buildBlocListener,
+        builder: (_, __) {
+          return Center(
+              child: CircleAvatar(
+            backgroundColor: Colors.grey[100],
+            radius: 50.0,
+            child: const FlutterLogo(
+              size: 50.0,
+            ),
+          ));
+        },
+      ),
     );
   }
 
@@ -34,16 +35,5 @@ class SplashScreen extends StatelessWidget {
     } else if (state is InitialiseComplete) {
       context.goNamed(Routes.kUsersScreen);
     }
-  }
-
-  /// build app logo
-  Widget _buildAvatar() {
-    return CircleAvatar(
-      backgroundColor: Colors.grey[100],
-      radius: 50.0,
-      child: const FlutterLogo(
-        size: 50.0,
-      ),
-    );
   }
 }

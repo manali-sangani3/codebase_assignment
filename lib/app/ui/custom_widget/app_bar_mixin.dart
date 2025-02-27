@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_project/config/app_colors.dart';
+import 'package:flutter_base_project/config/resources/text_styles.dart';
 import 'package:go_router/go_router.dart';
 
 mixin AppBarMixin {
@@ -21,11 +23,11 @@ mixin AppBarMixin {
       elevation: 0.1,
       backgroundColor: requireTransparent
           ? Colors.transparent
-          : Theme.of(context).appBarTheme.backgroundColor,
+          : AppColors.white,
       title: Text(title,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: Theme.of(context).textTheme.titleLarge),
+          style: h22().copyWith(fontWeight: FontWeight.w600)),
       actions: actions,
     );
   }

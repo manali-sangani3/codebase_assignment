@@ -1,20 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
-import '../../config/network/dio_config.dart';
-import '../../config/network/network_constants.dart';
-import '../model/base_model.dart';
-import '../model/user_data_entity.dart';
-import '../model/user_entity.dart';
-
-abstract class UserRepository {
-  /// Fetch all the users
-  Future<ResponseBaseModel> getUsers({int page = 1});
-}
+import '../../../config/network/dio_config.dart';
+import '../../../config/network/network_constants.dart';
+import '../../domain/repository/user_repository.dart';
+import '../../model/base_model.dart';
+import '../../model/user_data_entity.dart';
+import '../../model/user_entity.dart';
 
 class UserRepositoryImpl extends UserRepository {
   @override
-  Future<ResponseBaseModel> getUsers({int page = 1}) async {
+  Future<ResponseBaseModel> getUsers({int page = 1, BuildContext? context}) async {
     final response = await GetIt.I<DioProvider>().getBaseAPI(
       url: NetworkAPIs.kGetUsers,
       queryParams: {

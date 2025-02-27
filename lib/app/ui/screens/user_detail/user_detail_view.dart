@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/app/ui/custom_widget/app_bar_mixin.dart';
-import 'package:flutter_base_project/app/ui/screens/user_detail/cubit/user_detail_cubit.dart';
 import 'package:flutter_base_project/config/resources/text_styles.dart';
+import 'package:flutter_base_project/utils/app_localization.dart';
 import 'package:flutter_base_project/utils/extensions.dart';
-import 'package:flutter_base_project/utils/ui_components.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../model/user_data_entity.dart';
+import '../../custom_widget/cached_network_image_widget.dart';
 
 class UserDetailView extends StatefulWidget {
   final UserData details;
@@ -19,14 +18,7 @@ class UserDetailView extends StatefulWidget {
 
 class _UserDetailViewState extends State<UserDetailView> with AppBarMixin {
   @override
-  void initState() {
-    context.read<UserDetailCubit>().getUserData(widget.details);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    UserDetailCubit cubit = context.read<UserDetailCubit>();
     return Scaffold(
       appBar: buildAppBar(title: "", context: context),
       body: Padding(
@@ -34,12 +26,12 @@ class _UserDetailViewState extends State<UserDetailView> with AppBarMixin {
         child: Column(
           children: [
             10.verticalSpace, // Profile Image
-            UIComponent.cachedNetworkImageWidget(imageUrl: cubit.avatar),
+            CachedNetworkImageWidget(imageUrl: widget.details.avatar ?? ''),
             10.verticalSpace,
             // Name
             Text(
-              cubit.name ?? "",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              "${widget.details.firstName ?? ""} ${widget.details.lastName ?? ""}",
+              style: h22().copyWith(fontWeight: FontWeight.bold),
             ),
             40.verticalSpace,
 
@@ -55,7 +47,7 @@ class _UserDetailViewState extends State<UserDetailView> with AppBarMixin {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      "Contact Info",
+                      appStrings(context).lblContactInfo,
                       style: h14(),
                     ),
                   ),
@@ -63,10 +55,10 @@ class _UserDetailViewState extends State<UserDetailView> with AppBarMixin {
                     leading:
                         const Icon(Icons.email_rounded, color: Colors.grey),
                     title: Text(
-                      cubit.email ?? '',
+                      widget.details.email ?? '',
                       style: h20().copyWith(fontWeight: FontWeight.w600),
                     ),
-                    subtitle: Text("Personal"),
+                    subtitle:  Text(appStrings(context).lblPersonal),
                   ),
                 ],
               ),

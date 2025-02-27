@@ -1,14 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_base_project/app/navigation/route_arguments.dart';
 import 'package:flutter_base_project/app/navigation/routes.dart';
 import 'package:flutter_base_project/app/ui/screens/user_list/user_list_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../model/user_data_entity.dart';
 import '../ui/screens/splash/splash_screen.dart';
-import '../ui/screens/unknown/invalid_screen.dart';
 import '../ui/screens/user_detail/user_detail_view.dart';
 
 class AppRouter {
@@ -42,18 +38,16 @@ class AppRouter {
         name: Routes.kUserDetailScreen,
         path: RoutePaths.kUserDetailPath,
         builder: (BuildContext context, GoRouterState state) {
-          UserData? model;
-          String? modelJson = state.pathParameters[RouteArguments.userData];
-          if (modelJson != null) {
-            model = UserData.fromJson(jsonDecode(modelJson));
-          }
+          final UserData model = state.extra as UserData? ?? UserData();
           return UserDetailView(
-            details: model ?? UserData(),
+            details: model,
           );
         },
       ),
     ],
-    errorBuilder: (context, state) => const InvalidScreen(),
+    errorBuilder: (context, state) => const Center(
+      child: Text('Invalid Screen'),
+    ),
   );
 
   // Navigate to specific screen

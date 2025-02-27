@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_base_project/utils/app_localization.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../app_strings.dart';
 import '../flavor_config.dart';
 
 class DioProvider {
@@ -25,7 +26,7 @@ class DioProvider {
 
   /// Get base API.
   Future<Response> getBaseAPI(
-      {required String url, Map<String, dynamic>? queryParams}) async {
+      {required String url, Map<String, dynamic>? queryParams, BuildContext? context}) async {
     try {
       return await mDio.get(url, queryParameters: queryParams);
     } on DioException catch (ex) {
@@ -40,28 +41,8 @@ class DioProvider {
             requestOptions: RequestOptions());
       } else if (ex.type == DioExceptionType.connectionTimeout) {
         return Response(
-            data: AppStrings.connectionTimeoutMessage,
-            statusMessage: AppStrings.connectionTimeoutMessage,
-            statusCode: 500,
-            requestOptions: RequestOptions());
-      }
-      return Response(
-          data: ex.message,
-          statusMessage: ex.message,
-          statusCode: 500,
-          requestOptions: RequestOptions());
-    }
-  }
-
-  /// Post base API.
-  Future<Response> postBaseAPI({required String url, dynamic data}) async {
-    try {
-      return await mDio.post(url, data: data);
-    } on DioException catch (ex) {
-      if (ex.type == DioExceptionType.connectionTimeout) {
-        return Response(
-            data: AppStrings.connectionTimeoutMessage,
-            statusMessage: AppStrings.connectionTimeoutMessage,
+            data: appStrings(context!).connectionTimeoutMessage,
+            statusMessage: appStrings(context).connectionTimeoutMessage,
             statusCode: 500,
             requestOptions: RequestOptions());
       }

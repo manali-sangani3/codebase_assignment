@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_project/config/app_colors.dart';
-import 'package:flutter_base_project/utils/ui_components.dart';
+
+import 'custom_ink_well_widget.dart';
 
 mixin AppButtonMixin {
   Widget primaryButton(
       {required BuildContext context,
       required String title,
       required final VoidCallback onClick}) {
-    return UIComponent.customInkWellWidget(
+    return CustomInkWellWidget(
       onTap: onClick,
       child: Container(
         margin: const EdgeInsets.all(24),
@@ -22,7 +23,7 @@ mixin AppButtonMixin {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(color: Colors.white),
+                ?.copyWith(color: AppColors.white),
           ),
         ),
       ),

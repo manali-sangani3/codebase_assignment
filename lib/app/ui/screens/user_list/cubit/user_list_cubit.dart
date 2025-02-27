@@ -2,11 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_base_project/app/model/user_entity.dart';
+import 'package:flutter_base_project/utils/app_localization.dart';
 
+import '../../../../domain/repository/user_repository.dart';
 import '../../../../model/base_model.dart';
 import '../../../../model/user_data_entity.dart';
-import '../../../../repository/user_repository.dart';
-
 part 'user_list_state.dart';
 
 class UserListCubit extends Cubit<UserListState> {
@@ -86,7 +86,7 @@ class UserListCubit extends Cubit<UserListState> {
 
 
   // search users
-  void searchUsers(String query) {
+  void searchUsers(String query,  BuildContext context) {
     if (query.isEmpty) {
       filteredUsers = List.from(users);
     } else {
@@ -98,7 +98,7 @@ class UserListCubit extends Cubit<UserListState> {
     }
     if (filteredUsers.isEmpty) {
       emit(UsersNotFound(
-          errorMesssage: "No users found")); // Emit when search is empty
+          errorMessage: appStrings(context).errorNoUsers)); // Emit when search is empty
     } else {
       emit(UsersFound(filteredUsers, isLastPage));
     }

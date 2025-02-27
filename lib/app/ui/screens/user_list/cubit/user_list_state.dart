@@ -24,9 +24,9 @@ class UsersFound extends UserListState {
 }
 
 class UsersNotFound extends UserListState {
-  final String errorMesssage;
+  final String errorMessage;
 
-  UsersNotFound({required this.errorMesssage});
+  UsersNotFound({required this.errorMessage});
 
   @override
   List<Object> get props => [];

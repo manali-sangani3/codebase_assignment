@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
-const String fontFamilyDMSans = "DMSans";
-
 TextStyle dmSansText(double fontSize,
     {BuildContext? context,
     FontWeight fontWeight = FontWeight.w400,
@@ -24,45 +22,6 @@ TextStyle dmSansText(double fontSize,
       fontFamily: fontFamily);
 }
 
-TextStyle h8(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(8,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
-TextStyle h10(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(10,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
-TextStyle h12(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(12,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
 TextStyle h14(
     {BuildContext? context,
     FontWeight fontWeight = FontWeight.w400,
@@ -71,20 +30,6 @@ TextStyle h14(
   return dmSansText(14,
       context: context,
       fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
-TextStyle h15(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(14,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
       textOverflow: textOverflow,
       color: color);
 }
@@ -97,20 +42,18 @@ TextStyle h16(
   return dmSansText(16,
       context: context,
       fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
       textOverflow: textOverflow,
       color: color);
 }
 
 TextStyle h18(
     {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
+      FontWeight fontWeight = FontWeight.w400,
+      TextOverflow? textOverflow,
+      Color? color = AppColors.black}) {
   return dmSansText(18,
       context: context,
       fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
       textOverflow: textOverflow,
       color: color);
 }
@@ -123,46 +66,18 @@ TextStyle h20(
   return dmSansText(20,
       context: context,
       fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
       textOverflow: textOverflow,
       color: color);
 }
 
 TextStyle h22(
     {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w700,
+    FontWeight fontWeight = FontWeight.w400,
     TextOverflow? textOverflow,
     Color? color = AppColors.black}) {
   return dmSansText(22,
       context: context,
       fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
-TextStyle h24(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w700,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(24,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
-      textOverflow: textOverflow,
-      color: color);
-}
-
-TextStyle h48(
-    {BuildContext? context,
-    FontWeight fontWeight = FontWeight.w400,
-    TextOverflow? textOverflow,
-    Color? color = AppColors.black}) {
-  return dmSansText(48,
-      context: context,
-      fontWeight: fontWeight,
-      fontFamily: fontFamilyDMSans,
       textOverflow: textOverflow,
       color: color);
 }

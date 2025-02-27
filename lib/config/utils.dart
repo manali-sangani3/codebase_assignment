@@ -16,8 +16,4 @@ class Utils {
       ..clearSnackBars()
       ..showSnackBar(snackBar);
   }
-
-  static bool isEmpty(String? string) {
-    return string == null || string.isEmpty;
-  }
 }
